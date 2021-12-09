@@ -15,7 +15,7 @@ varying highp vec3 vFragPos;
 varying highp vec3 vNormal;
 
 // Shadow map related variables
-#define NUM_SAMPLES 22
+#define NUM_SAMPLES 30
 #define BLOCKER_SEARCH_NUM_SAMPLES NUM_SAMPLES
 #define PCF_NUM_SAMPLES NUM_SAMPLES
 #define NUM_RINGS 10
@@ -140,8 +140,8 @@ float PCSS(sampler2D shadowMap, vec4 coords){
 
   // STEP 3: filtering
   float textureSize = 2048.0;
-  float filterStride = 1.0;
-  float filterRange = filterStride / textureSize * wPenumbra * 6.0;
+  float filterStride = 5.0;
+  float filterRange = filterStride / textureSize * wPenumbra ;
 
   float bias = 0.005;
   int unBlockCount = 0;
