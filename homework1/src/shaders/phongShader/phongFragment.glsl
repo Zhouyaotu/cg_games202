@@ -15,7 +15,7 @@ varying highp vec3 vFragPos;
 varying highp vec3 vNormal;
 
 // Shadow map related variables
-#define NUM_SAMPLES 30
+#define NUM_SAMPLES 100
 #define BLOCKER_SEARCH_NUM_SAMPLES NUM_SAMPLES
 #define PCF_NUM_SAMPLES NUM_SAMPLES
 #define NUM_RINGS 10
@@ -24,7 +24,7 @@ varying highp vec3 vNormal;
 #define PI 3.141592653589793
 #define PI2 6.283185307179586
 
-#define LIGHT_WIDTH 5.0
+#define LIGHT_WIDTH 15.0
 
 uniform sampler2D uShadowMap;
 
@@ -86,8 +86,8 @@ void uniformDiskSamples( const in vec2 randomSeed ) {
 }
 
 float findBlocker( sampler2D shadowMap,  vec2 uv, float zReceiver ) {
-   //poissonDiskSamples(uv);
-  uniformDiskSamples(uv);
+  poissonDiskSamples(uv);
+  //uniformDiskSamples(uv);
 
   float textureSize = 2048.0;
   float filterStride = 1.0;
@@ -95,9 +95,9 @@ float findBlocker( sampler2D shadowMap,  vec2 uv, float zReceiver ) {
   
   int shadowCount=0;
   float depthSum=0.0;
-  for(int i=0;i<NUM_SAMPLES;i++){
-    vec2 sampleCoord = poissonDisk[i] * filterRange + uv;
-    vec4 rgbaDepth = texture2D(shadowMap,sampleCoord);
+  for(int i=0; i<NUM_SAMPLES; i++){
+    vec2 sampleCoord = uv + poissonDisk[i] * filterRange; // uv (add bias from samples)
+    vec4 rgbaDepth = texture2D(shadowMap, sampleCoord);
     float depth = unpack(rgbaDepth);
     if(zReceiver > depth-0.01){
       depthSum += depth;
