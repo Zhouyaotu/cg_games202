@@ -60,7 +60,7 @@ function GAMES202Main() {
 
 	// Add light
 	let lightPos, lightDir, lightRadiance;
-	/*
+	///*
 	// Cave
 	lightRadiance = [20, 20, 20];
 	lightPos = [-0.45, 5.40507, 0.637043];
@@ -69,8 +69,8 @@ function GAMES202Main() {
 		'y': -0.89896828,
 		'z': 0.19843153,
 	};
-	*/
-	// /*
+	//*/
+	/*
 	// Cube
 	lightRadiance = [1, 1, 1];
 	lightPos = [-2, 4, 1];
@@ -85,9 +85,9 @@ function GAMES202Main() {
 	renderer.addLight(directionLight);
 
 	// Add shapes
-	loadGLTF(renderer, 'assets/cube/', 'cube1', 'SSRMaterial');
+	// loadGLTF(renderer, 'assets/cube/', 'cube1', 'SSRMaterial');
 	// loadGLTF(renderer, 'assets/cube/', 'cube2', 'SSRMaterial');
-	// loadGLTF(renderer, 'assets/cave/', 'cave', 'SSRMaterial');
+	 loadGLTF(renderer, 'assets/cave/', 'cave', 'SSRMaterial');
 
 	function createGUI() {
 		const gui = new dat.gui.GUI();
